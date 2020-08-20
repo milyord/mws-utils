@@ -115,7 +115,7 @@ describe("main.js", () => {
       },
     });
   });
-  it("compose it all together", () => {
+  it("compose", () => {
     const defaultOptions = {
       host: "mws.amazonservices.com",
       path: "/Orders/2013-09-01",
@@ -124,7 +124,6 @@ describe("main.js", () => {
     function getOrdersById(ids = []) {
       return compose(
         sortEncode, // url encode
-        withSignature("key")(defaultOptions), // you always want to sign last
         withList("AmazonOrderId.Id.")(ids),
         withAction("GetOrder", "2013-09-01"),
         withDate("Timestamp", new Date("01/01/2020")), // freeze timestamp for testing
@@ -136,9 +135,9 @@ describe("main.js", () => {
         withGlobals
       )();
     }
-    expect(getOrdersById(["id1", "id2"])).to.eql(
+    expect(getOrdersById(["id1", "id2"])).to.equal(
       sortEncode({
-        Timestamp: "2020-01-01T08:00:00.000Z",
+        Timestamp: new Date("01/01/2020").toISOString(),
         "AmazonOrderId.Id.1": "id1",
         "AmazonOrderId.Id.2": "id2",
         SignatureMethod: "HmacSHA256",
@@ -148,7 +147,6 @@ describe("main.js", () => {
         MWSAuthToken: "mwsatoken",
         Action: "GetOrder",
         Version: "2013-09-01",
-        Signature: "DGHCZX24ySGby9sRkZqVNZh9jGgxJGf+ornOFHSHe7Q=",
       })
     );
   });
