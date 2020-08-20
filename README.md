@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/milyord/mws-utils.svg?branch=master)](https://travis-ci.org/milyord/mws-utils)
+[![Coverage Status](https://coveralls.io/repos/github/milyord/mws-utils/badge.svg?branch=master)](https://coveralls.io/github/milyord/mws-utils?branch=master)
+
 # mws-utils
 
 As the name suggests, this library provides some useful functions for dealing with requests to Amazon's MWS APIs.
