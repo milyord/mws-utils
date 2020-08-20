@@ -1,6 +1,6 @@
 {
   "name": "mws-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Handy little functions for interacting with Amazon's MWS APIs",
   "main": "dist/mws-utils.js",
   "scripts": {
